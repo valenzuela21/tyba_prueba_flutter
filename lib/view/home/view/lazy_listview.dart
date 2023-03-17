@@ -20,7 +20,7 @@ class LazyListView extends StatefulWidget {
 class _LazyListViewState extends State<LazyListView> {
   late DetailViewmodel detailViewmodel;
   final scrollController = ScrollController();
-
+  final TextEditingController textControllerSearch =  TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -31,6 +31,7 @@ class _LazyListViewState extends State<LazyListView> {
   @override
   void dispose() {
     scrollController.dispose();
+    textControllerSearch.dispose();
     super.dispose();
   }
 
@@ -56,6 +57,7 @@ class _LazyListViewState extends State<LazyListView> {
       },
       builder: (context, state) {
         GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
         if (state is HomeInitial) {
           context.read<HomeCubit>().fetchNextCharacters(context);
           return const Center(
@@ -74,6 +76,7 @@ class _LazyListViewState extends State<LazyListView> {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: textControllerSearch,
                         autocorrect: false,
                         keyboardType:  TextInputType.text,
                         validator: (String? value){
@@ -85,6 +88,7 @@ class _LazyListViewState extends State<LazyListView> {
                       ),
                       const SizedBox(height: 10),
                       TextButton(onPressed: (){
+                        //print(textControllerSearch.text);
                         context.read<HomeCubit>().findNextCharacter('3-D Man');
                       }, child: Text(AppConstants.searchText), style: buttonStyle(context),)
                     ],
