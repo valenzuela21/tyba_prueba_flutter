@@ -49,16 +49,16 @@ class HomeCubit extends Cubit<HomeState> {
 
   List<CharacterModel> get characterFilter => _characterFilterMaps
       .map(
-        (characterMap) => CharacterModel(
-      id: characterMap['id'],
-      name: characterMap['name'],
-      description: characterMap['description'],
-      photoURL: characterMap['thumbnail']['path'] +
-          '/standard_xlarge.' +
-          characterMap['thumbnail']['extension'],
-    ),
-  )
-      .toList();
+        (characterMap) {
+          return CharacterModel(
+            id: characterMap.id,
+            name: characterMap.name,
+            description: characterMap.description,
+            photoURL: characterMap.photoUrl,
+          );
+        }
+  ).toList();
+
 
   Future findNextCharacter(String searchTerm) async {
     var respConfig = configMode();
@@ -72,13 +72,11 @@ class HomeCubit extends Cubit<HomeState> {
 
       _characterMaps.addAll(response.characterMapsList!);
       _characterFilterMaps.clear();
-
       var characterFilters = characters.where(
               (CharacterModel element) => element.name!.contains(searchTerm)).toList();
-
-
-      _characterFilterMaps.addAll(characterFilters!);
-      countOfCharacters = characterFilters.length;
+      _characterFilterMaps.addAll(characterFilters);
+      countOfCharacters = _characterFilterMaps.length;
+      print(characterFilter);
       emit(HomeCompleted(characterFilter));
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
