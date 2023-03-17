@@ -78,7 +78,8 @@ class HomeCubit extends Cubit<HomeState> {
       countOfCharacters = _characterFilterMaps.length;
 
       emit(HomeCompleted(characterFilter));
-      emit(HomeInitial());
+      emit(const HomeFilter());
+
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
     } catch (e) {

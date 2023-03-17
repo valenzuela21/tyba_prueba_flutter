@@ -63,6 +63,10 @@ class _LazyListViewState extends State<LazyListView> {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        } else if(state is HomeFilter) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (state is HomeError) {
           return ErrorDialog(errorMessage: state.message);
         } else {

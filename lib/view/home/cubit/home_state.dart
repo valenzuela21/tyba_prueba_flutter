@@ -9,6 +9,11 @@ class HomeInitial extends HomeState {
   const HomeInitial();
 }
 
+
+class HomeFilter extends HomeState {
+  const HomeFilter();
+}
+
 class HomeCompleted extends HomeState {
   const HomeCompleted(this.characters);
 
