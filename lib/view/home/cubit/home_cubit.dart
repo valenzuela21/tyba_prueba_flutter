@@ -75,11 +75,14 @@ class HomeCubit extends Cubit<HomeState> {
           .toList();
 
       _characterFilterMaps.clear();
-      
+
       _characterFilterMaps.addAll(characterFilters);
       countOfCharacters = _characterFilterMaps.length;
 
+      _hasNext = false;
+
       emit(HomeCompleted(characterFilter));
+      emit(HomeFilter());
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
     } catch (e) {

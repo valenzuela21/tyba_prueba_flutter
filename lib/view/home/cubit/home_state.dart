@@ -15,9 +15,7 @@ class HomeFilter extends HomeState {
 }
 
 class HomeCompleted extends HomeState {
-  HomeCompleted(this.characters){
-  print("Construct ${this.characters}");
-  }
+  HomeCompleted(this.characters);
 
   final List<CharacterModel> characters;
     @override

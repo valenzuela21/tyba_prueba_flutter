@@ -64,10 +64,6 @@ class _LazyListViewState extends State<LazyListView> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is HomeFilter) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         } else if (state is HomeError) {
           return ErrorDialog(errorMessage: state.message);
         } else {
@@ -108,6 +104,40 @@ class _LazyListViewState extends State<LazyListView> {
                   ),
                 ),
               )),
+              state is HomeFilter?
+              Expanded(
+                  child: ListView(
+                    controller: scrollController,
+                    padding: context.paddingLowHorizontal,
+                    children: [
+                      ...context
+                          .read<HomeCubit>()
+                          .characterFilter
+                          .map(
+                            (character) => GestureDetector(
+                          onTap: () => context
+                              .read<HomeCubit>()
+                              .navigateToDetailView(character, detailViewmodel),
+                          child: ListTile(
+                            title: Text(character.name!),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                              NetworkImage(character.photoURL!),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                      if (context.read<HomeCubit>().hasNext)
+                        const Center(
+                          child: SizedBox(
+                            height: 25,
+                            width: 25,
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                    ],
+                  )):
               Expanded(
                   child: ListView(
                 controller: scrollController,
