@@ -17,14 +17,14 @@ class ModalCustomButton extends StatelessWidget {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Filtrar'),
+            title: const Text(AppConstants.showDialog),
             content: children,
             actions: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Text('Cerrar', style: TextStyle(color: Colors.white),),
+                child: const Text(AppConstants.closeDialog, style: TextStyle(color: Colors.white),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

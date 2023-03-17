@@ -83,7 +83,7 @@ class _LazyListViewState extends State<LazyListView> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10),
                       TextButton(onPressed: (){
                         context.read<HomeCubit>().findNextCharacter('3-D Man');
                       }, child: Text(AppConstants.searchText), style: buttonStyle(context),)
