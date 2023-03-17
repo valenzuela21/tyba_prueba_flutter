@@ -90,6 +90,7 @@ class _LazyListViewState extends State<LazyListView> {
                       TextButton(onPressed: (){
                         //print('Result: ' + textControllerSearch.text);
                         context.read<HomeCubit>().findNextCharacter('3-D Man');
+                        Navigator.of(context).pop();
                       }, child: Text(AppConstants.searchText), style: buttonStyle(context),)
                     ],
                   ),
