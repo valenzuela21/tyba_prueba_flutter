@@ -69,14 +69,16 @@ class HomeCubit extends Cubit<HomeState> {
           respConfig[0], respConfig[1], offset, limit);
 
       _characterMaps.addAll(response.characterMapsList!);
-      _characterFilterMaps.clear();
+
       var characterFilters = characters
           .where((CharacterModel element) => element.name!.contains(searchTerm))
           .toList();
+
       _characterFilterMaps.addAll(characterFilters);
       countOfCharacters = _characterFilterMaps.length;
-      print(characterFilter);
+
       emit(HomeCompleted(characterFilter));
+      emit(HomeInitial());
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
     } catch (e) {
