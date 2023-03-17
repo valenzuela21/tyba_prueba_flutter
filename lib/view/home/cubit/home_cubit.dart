@@ -54,7 +54,7 @@ class HomeCubit extends Cubit<HomeState> {
             id: characterMap.id,
             name: characterMap.name,
             description: characterMap.description,
-            photoURL: characterMap.photoUrl,
+            photoURL: characterMap.photoURL,
           );
         }
   ).toList();
