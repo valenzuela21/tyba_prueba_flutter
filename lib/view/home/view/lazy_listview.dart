@@ -94,7 +94,7 @@ class _LazyListViewState extends State<LazyListView> {
                           //print('Result: ' + textControllerSearch.text);
                           context
                               .read<HomeCubit>()
-                              .findNextCharacter('3-D Man');
+                              .findNextCharacter(textControllerSearch.text.toLowerCase());
                           Navigator.of(context).pop();
                         },
                         child: Text(AppConstants.searchText),

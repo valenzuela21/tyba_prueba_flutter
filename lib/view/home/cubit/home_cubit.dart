@@ -71,13 +71,14 @@ class HomeCubit extends Cubit<HomeState> {
       _characterMaps.addAll(response.characterMapsList!);
 
       var characterFilters = characters
-          .where((CharacterModel element) => element.name!.contains(searchTerm))
+          .where((CharacterModel element) => element.name!.toLowerCase().contains(searchTerm))
           .toList();
 
       _characterFilterMaps.clear();
 
       _characterFilterMaps.addAll(characterFilters);
       countOfCharacters = _characterFilterMaps.length;
+      print(characterFilters);
 
       _hasNext = false;
 
