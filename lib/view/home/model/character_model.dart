@@ -10,4 +10,9 @@ class CharacterModel {
   String? name;
   String? photoURL;
   String? description;
+
+  @override
+  String toString() {
+    return 'CharacterModel{id: $id, name: $name, photoURL: $photoURL, description: $description}';
+  }
 }

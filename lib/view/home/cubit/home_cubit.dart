@@ -47,30 +47,31 @@ class HomeCubit extends Cubit<HomeState> {
       .toList();
 
   Future findNextCharacter(String searchTerm) async {
-   var respConfig = configMode();
-   CharacterResponseModel response;
+    var respConfig = configMode();
+    CharacterResponseModel response;
 
-   _characterMaps.clear();
+    try {
+      offset += 30;
 
-   try{
-     offset += 30;
+      response = await HomeService.getCharacters(
+          respConfig[0], respConfig[1], offset, limit);
 
-     response = await HomeService.getCharacters(
-         respConfig[0], respConfig[1], offset, limit);
+      _characterMaps.addAll(response.characterMapsList!);
 
-     if (response.characterMapsList!.length < limit) _hasNext = false;
+      final characterFilter = characters.where(
+          (CharacterModel element) => element.name!.contains(searchTerm));
+      _characterMaps.clear();
+      _characterMaps.addAll(characterFilter!);
 
-     countOfCharacters = response.count!;
+      if (characterFilter!.length < limit) _hasNext = false;
 
-     if (response.characterMapsList!.length < limit) _hasNext = false;
-
-     emit(HomeCompleted(characters));
-   } on DioError catch (e) {
-     emit(HomeError(DioExceptions.fromDioError(e).message!));
-   } catch (e) {
-     rethrow;
-   }
-   _isFetchingCharacters = false;
+      emit(HomeCompleted(characters));
+    } on DioError catch (e) {
+      emit(HomeError(DioExceptions.fromDioError(e).message!));
+    } catch (e) {
+      rethrow;
+    }
+    _isFetchingCharacters = false;
   }
 
   Future fetchNextCharacters(BuildContext context) async {
