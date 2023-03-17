@@ -30,7 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
   bool get hasNext => _hasNext;
 
   final _characterMaps = [];
-  final _characterLiterMaps = [];
+  final _characterFilterMaps = [];
 
   bool _isFetchingCharacters = false;
 
@@ -47,7 +47,7 @@ class HomeCubit extends Cubit<HomeState> {
       )
       .toList();
 
-  List<CharacterModel> get characterFilter => _characterLiterMaps
+  List<CharacterModel> get characterFilter => _characterFilterMaps
       .map(
         (characterMap) => CharacterModel(
       id: characterMap['id'],
@@ -71,14 +71,14 @@ class HomeCubit extends Cubit<HomeState> {
           respConfig[0], respConfig[1], offset, limit);
 
       _characterMaps.addAll(response.characterMapsList!);
-      _characterLiterMaps.clear();
+      _characterFilterMaps.clear();
+
       var characterFilters = characters.where(
               (CharacterModel element) => element.name!.contains(searchTerm)).toList();
 
-      _characterLiterMaps.addAll(characterFilters!);
 
+      _characterFilterMaps.addAll(characterFilters!);
       countOfCharacters = characterFilters.length;
-
       emit(HomeCompleted(characterFilter));
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
