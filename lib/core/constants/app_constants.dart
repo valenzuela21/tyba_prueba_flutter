@@ -9,4 +9,6 @@ class AppConstants {
   static const noComics = 'No hay comics en este personaje';
   static const okButtonText = 'Esta Bien';
   static const filterText = 'Filtrar';
+  static const insertText = 'Inserte el texto a buscar...';
+  static const searchText = 'Search';
 }
