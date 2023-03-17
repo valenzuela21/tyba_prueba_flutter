@@ -20,7 +20,8 @@ class LazyListView extends StatefulWidget {
 class _LazyListViewState extends State<LazyListView> {
   late DetailViewmodel detailViewmodel;
   final scrollController = ScrollController();
-  final TextEditingController textControllerSearch =  TextEditingController();
+  final TextEditingController textControllerSearch = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +64,7 @@ class _LazyListViewState extends State<LazyListView> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if(state is HomeFilter) {
+        } else if (state is HomeFilter) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -72,7 +73,8 @@ class _LazyListViewState extends State<LazyListView> {
         } else {
           return Column(
             children: [
-              ModalCustomButton(children:  SizedBox(
+              ModalCustomButton(
+                  children: SizedBox(
                 height: 150,
                 child: Form(
                   key: formKey,
@@ -82,8 +84,8 @@ class _LazyListViewState extends State<LazyListView> {
                       TextFormField(
                         controller: textControllerSearch,
                         autocorrect: false,
-                        keyboardType:  TextInputType.text,
-                        validator: (String? value){
+                        keyboardType: TextInputType.text,
+                        validator: (String? value) {
                           if (value == null || value.trim().isEmpty) {
                             return AppConstants.insertText;
                           }
@@ -91,11 +93,17 @@ class _LazyListViewState extends State<LazyListView> {
                         },
                       ),
                       const SizedBox(height: 10),
-                      TextButton(onPressed: (){
-                        //print('Result: ' + textControllerSearch.text);
-                        context.read<HomeCubit>().findNextCharacter('3-D Man');
-                        Navigator.of(context).pop();
-                      }, child: Text(AppConstants.searchText), style: buttonStyle(context),)
+                      TextButton(
+                        onPressed: () {
+                          //print('Result: ' + textControllerSearch.text);
+                          context
+                              .read<HomeCubit>()
+                              .findNextCharacter('3-D Man');
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(AppConstants.searchText),
+                        style: buttonStyle(context),
+                      )
                     ],
                   ),
                 ),

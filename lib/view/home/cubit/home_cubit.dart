@@ -74,12 +74,12 @@ class HomeCubit extends Cubit<HomeState> {
           .where((CharacterModel element) => element.name!.contains(searchTerm))
           .toList();
 
+      _characterFilterMaps.clear();
+      
       _characterFilterMaps.addAll(characterFilters);
       countOfCharacters = _characterFilterMaps.length;
 
       emit(HomeCompleted(characterFilter));
-      emit(const HomeFilter());
-
     } on DioError catch (e) {
       emit(HomeError(DioExceptions.fromDioError(e).message!));
     } catch (e) {
