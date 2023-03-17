@@ -47,20 +47,18 @@ class HomeCubit extends Cubit<HomeState> {
       )
       .toList();
 
-  List<CharacterModel> get characterFilter => _characterFilterMaps
-      .map(
-        (characterMap) {
-          return CharacterModel(
-            id: characterMap.id,
-            name: characterMap.name,
-            description: characterMap.description,
-            photoURL: characterMap.photoURL,
-          );
-        }
-  ).toList();
-
+  List<CharacterModel> get characterFilter =>
+      _characterFilterMaps.map((characterMap) => CharacterModel(
+          id: characterMap.id,
+          name: characterMap.name,
+          description: characterMap.description,
+          photoURL: characterMap.photoURL,
+      )).toList();
 
   Future findNextCharacter(String searchTerm) async {
+    if (_isFetchingCharacters) return;
+    _isFetchingCharacters = true;
+
     var respConfig = configMode();
     CharacterResponseModel response;
 
@@ -72,8 +70,9 @@ class HomeCubit extends Cubit<HomeState> {
 
       _characterMaps.addAll(response.characterMapsList!);
       _characterFilterMaps.clear();
-      var characterFilters = characters.where(
-              (CharacterModel element) => element.name!.contains(searchTerm)).toList();
+      var characterFilters = characters
+          .where((CharacterModel element) => element.name!.contains(searchTerm))
+          .toList();
       _characterFilterMaps.addAll(characterFilters);
       countOfCharacters = _characterFilterMaps.length;
       print(characterFilter);
