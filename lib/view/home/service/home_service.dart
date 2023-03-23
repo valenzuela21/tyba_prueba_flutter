@@ -27,7 +27,7 @@ class HomeService {
     try {
       final CharacterResponseModel characterResponseModelAll =
           await NetworkManager.instance!.get(
-        'characters?ts=$timeStamp&apikey=${AppConstants.publicKey}&hash=$hashCode',
+        'characters?ts=$timeStamp&apikey=${AppConstants.publicKey}&hash=$hashCode&limit=100',
         CharacterResponseModel.fromJson,
       );
       return characterResponseModelAll;
