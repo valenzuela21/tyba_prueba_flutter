@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_bloc/core/constants/app_constants.dart';
+import 'package:marvel/core/constants/app_constants.dart';
 
 import 'button_related/button_style.dart';
 class ModalCustomButton extends StatelessWidget {

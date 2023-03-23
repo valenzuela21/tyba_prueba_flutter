@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_bloc/core/components/button_related/button_style.dart';
-import 'package:marvel_bloc/core/constants/app_constants.dart';
+import 'package:marvel/core/components/button_related/button_style.dart';
+import 'package:marvel/core/constants/app_constants.dart';
 import '../../../core/components/dialog/error_dialog.dart';
 import '../../../core/components/modal_custombtn.dart';
 import '../../../core/extension/context_extensions.dart';

@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
-import 'package:marvel_bloc/view/detail/view/detail_view.dart' as _i3;
-import 'package:marvel_bloc/view/detail/viewmodel/detail_viewmodel.dart'
+import 'package:marvel/view/detail/view/detail_view.dart' as _i3;
+import 'package:marvel/view/detail/viewmodel/detail_viewmodel.dart'
     as _i7;
-import 'package:marvel_bloc/view/home/model/character_model.dart' as _i6;
-import 'package:marvel_bloc/view/home/view/home_view.dart' as _i2;
-import 'package:marvel_bloc/view/splash/view/splash_view.dart' as _i1;
+import 'package:marvel/view/home/model/character_model.dart' as _i6;
+import 'package:marvel/view/home/view/home_view.dart' as _i2;
+import 'package:marvel/view/splash/view/splash_view.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
