@@ -22,4 +22,17 @@ class HomeService {
     }
   }
 
+  static Future<CharacterResponseModel> getFindCharacters(
+      int timeStamp, String hashCode) async {
+    try {
+      final CharacterResponseModel characterResponseModelAll =
+          await NetworkManager.instance!.get(
+        'characters?ts=$timeStamp&apikey=${AppConstants.publicKey}&hash=$hashCode',
+        CharacterResponseModel.fromJson,
+      );
+      return characterResponseModelAll;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

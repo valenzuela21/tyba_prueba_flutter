@@ -59,26 +59,28 @@ class HomeCubit extends Cubit<HomeState> {
     if (_isFetchingCharacters) return;
     _isFetchingCharacters = true;
 
+    _hasNext = true;
+
     var respConfig = configMode();
     CharacterResponseModel response;
 
     try {
-      offset += 30;
-
-      response = await HomeService.getCharacters(
-          respConfig[0], respConfig[1], offset, limit);
+      _characterMaps.clear();
+      
+      response = await HomeService.getFindCharacters(
+          respConfig[0], respConfig[1]);
 
       _characterMaps.addAll(response.characterMapsList!);
+
+      _characterFilterMaps.clear();
 
       var characterFilters = characters
           .where((CharacterModel element) => element.name!.toLowerCase().contains(searchTerm))
           .toList();
 
-      _characterFilterMaps.clear();
-
       _characterFilterMaps.addAll(characterFilters);
+
       countOfCharacters = _characterFilterMaps.length;
-      print(characterFilters);
 
       _hasNext = false;
 

@@ -104,16 +104,13 @@ class _LazyListViewState extends State<LazyListView> {
                   ),
                 ),
               )),
-              state is HomeFilter?
+              state is HomeFilter ?
               Expanded(
                   child: ListView(
                     controller: scrollController,
                     padding: context.paddingLowHorizontal,
                     children: [
-                      ...context
-                          .read<HomeCubit>()
-                          .characterFilter
-                          .map(
+                      ...context.read<HomeCubit>().characterFilter.map(
                             (character) => GestureDetector(
                           onTap: () => context
                               .read<HomeCubit>()

@@ -17,7 +17,7 @@ class NetworkManager {
     _dio = Dio(baseOptions);
 
     _dio!.interceptors.clear();
-    _dio!.interceptors.add(PrettyDioLogger());
+    //_dio!.interceptors.add(PrettyDioLogger());
     _dio!.interceptors.add(RetryInterceptor(dio: _dio!));
     _dio!.interceptors.add(InterceptorsWrapper(
       onError: (e, handler) {
